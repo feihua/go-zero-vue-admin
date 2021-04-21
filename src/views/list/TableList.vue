@@ -79,7 +79,7 @@
       <s-table
         ref="table"
         size="default"
-        rowKey="key"
+        rowKey="id"
         :columns="columns"
         :data="loadData"
         :alert="true"
@@ -121,7 +121,7 @@
 <script>
 import moment from 'moment'
 import { STable, Ellipsis } from '@/components'
-import { getRoleList, getServiceList } from '@/api/manage'
+import { list } from '@/api/user'
 
 import StepByStepModal from './modules/StepByStepModal'
 import CreateForm from './modules/CreateForm'
@@ -133,30 +133,30 @@ const columns = [
   },
   {
     title: '规则编号',
-    dataIndex: 'no'
+    dataIndex: 'name'
   },
-  {
-    title: '描述',
-    dataIndex: 'description',
-    scopedSlots: { customRender: 'description' }
-  },
-  {
-    title: '服务调用次数',
-    dataIndex: 'callNo',
-    sorter: true,
-    needTotal: true,
-    customRender: (text) => text + ' 次'
-  },
-  {
-    title: '状态',
-    dataIndex: 'status',
-    scopedSlots: { customRender: 'status' }
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updatedAt',
-    sorter: true
-  },
+  // {
+  //   title: '描述',
+  //   dataIndex: 'description',
+  //   scopedSlots: { customRender: 'description' }
+  // },
+  // {
+  //   title: '服务调用次数',
+  //   dataIndex: 'callNo',
+  //   sorter: true,
+  //   needTotal: true,
+  //   customRender: (text) => text + ' 次'
+  // },
+  // {
+  //   title: '状态',
+  //   dataIndex: 'status',
+  //   scopedSlots: { customRender: 'status' }
+  // },
+  // {
+  //   title: '更新时间',
+  //   dataIndex: 'updatedAt',
+  //   sorter: true
+  // },
   {
     title: '操作',
     dataIndex: 'action',
@@ -207,9 +207,10 @@ export default {
       loadData: parameter => {
         const requestParameters = Object.assign({}, parameter, this.queryParam)
         console.log('loadData request parameters:', requestParameters)
-        return getServiceList(requestParameters)
+        return list({ current: 1, pageSize: 10 })
           .then(res => {
-            return res.result
+            console.log(res, 111111111)
+            return res
           })
       },
       selectedRowKeys: [],
@@ -225,7 +226,7 @@ export default {
     }
   },
   created () {
-    getRoleList({ t: new Date() })
+    list({ current: 1, pageSize: 10 })
   },
   computed: {
     rowSelection () {

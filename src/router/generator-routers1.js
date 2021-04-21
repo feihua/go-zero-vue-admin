@@ -77,7 +77,7 @@ const rootRouter = {
     name: 'dashboard',
     path: '/dashboard',
     component: 'RouteView',
-    redirect: '/list/table',
+    redirect: '/dashboard/list',
     hidden: false,
     hideChildrenInMenu: false,
     meta: {

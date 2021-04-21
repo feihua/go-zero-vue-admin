@@ -52,7 +52,7 @@ const user = {
     // 获取用户信息
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
-        getInfo().then(response => {
+        getInfo(storage.get(ACCESS_TOKEN)).then(response => {
           const { name, avatar, menuTreeVue } = response
 
           // if (result.role && result.role.permissions.length > 0) {
@@ -71,6 +71,7 @@ const user = {
           //   reject(new Error('getInfo: roles must be a non-null array !'))
           // }
 
+          commit('SET_ROLES', 'admin')
           commit('SET_NAME', name)
           commit('SET_AVATAR', avatar)
 
