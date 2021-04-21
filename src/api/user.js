@@ -1,7 +1,10 @@
 import request from '@/utils/request'
 
 const sysUserApi = {
-  list: '/sys/user/list'
+  list: '/sys/user/list',
+  add: '/sys/user/add',
+  update: '/sys/user/update',
+  delete: '/sys/user/delete'
 
 }
 
@@ -19,6 +22,30 @@ const sysUserApi = {
 export function list (parameter) {
   return request({
     url: sysUserApi.list,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function addUser (parameter) {
+  return request({
+    url: sysUserApi.add,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function update (parameter) {
+  return request({
+    url: sysUserApi.update,
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function deleteUser (parameter) {
+  return request({
+    url: sysUserApi.delete,
     method: 'post',
     data: parameter
   })
