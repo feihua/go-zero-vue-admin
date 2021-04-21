@@ -346,7 +346,8 @@
           content: (h) => <div style="color:red;">数据删除后不可恢复</div>,
         okText: "确认",
         cancelText: "取消",
-          onOk() {
+        onOk()
+        {
           deleteUser({ids:[id]}).then((response) => {
             console.log(response)
             if (response.code=='000000') {
@@ -366,11 +367,12 @@
 
           console.log("OK：" + id)
         },
-        onCancel (){
+        onCancel ()
+        {
           console.log("Cancel")
         }
       })
-      }
     }
   }
+}
 </script>
